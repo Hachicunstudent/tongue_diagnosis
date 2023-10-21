@@ -52,7 +52,7 @@ if uploaded_file is not None:
         progress = st.progress(0, text="Image processing, please wait")
         img_path=file_path
         #Load model
-        model_dect_dir="tongue_obj_dect_model"
+        model_dect_dir="X2"
         imported = tf.saved_model.load(model_dect_dir)
         model_fn = imported.signatures['serving_default']
         # Dự đoán từ model
