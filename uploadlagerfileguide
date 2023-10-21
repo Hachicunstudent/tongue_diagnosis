@@ -1,0 +1,54 @@
+Đây là thư mục của tôi :"https://github.com/Hachicunstudent/tongue_diagnosis" trong đó có folder tên X2, trong folder X2 có folder variables, tôi muốn tải lên một tập tin lớn hơn 100 Mb vào folder variables thì phải làm thế nào? 
+
+
+Tất nhiên! Dưới đây là hướng dẫn chi tiết từng bước để bạn có thể tải lên tệp lớn hơn 100MB lên GitHub sử dụng Git LFS:
+
+Bước 1: Cài đặt Git LFS
+Mở Terminal hoặc Command Prompt trên máy tính của bạn.
+Để cài đặt Git LFS, chạy lệnh sau:
+bash
+Copy code
+git lfs install
+Chương trình sẽ thông báo "Git LFS initialized." nếu cài đặt thành công.
+
+GitClone thư mục cần tạo trên máy tính
+
+Bước 2: Đi đến thư mục dự án
+Trong Terminal hoặc Command Prompt, sử dụng lệnh cd để di chuyển đến thư mục dự án của bạn:
+
+bash
+
+Copy code
+cd [đường dẫn đến thư mục dự án]
+trước khi thực hiện bước 3, bạn cần chắc chắn rằng tệp bạn muốn tải lên đã được copy hoặc di chuyển vào thư mục variables.
+
+Hãy thực hiện điều này trước:
+
+Copy hoặc di chuyển tệp (ví dụ large-file.zip) vào thư mục variables trên máy tính của bạn.
+Sau khi đã chắc chắn tệp đã nằm trong thư mục variables, hãy tiếp tục thực hiện bước 3 như hướng dẫn trước đó.
+
+cảm ơn bạn đã cung cấp thông tin chi tiết. Với tệp có tên "variables.data-00000-of-00001", bạn cần thực hiện các bước sau:
+
+Đầu tiên, copy hoặc di chuyển tệp "variables.data-00000-of-00001" vào thư mục variables trên máy tính của bạn.
+
+Tiếp theo, sử dụng Git LFS để theo dõi tệp này. Trong Terminal hoặc Command Prompt, khi bạn đã ở trong thư mục dự án:
+
+bash
+Copy code
+git lfs track "X2/variables/variables.data-00000-of-00001"
+Thêm tệp và .gitattributes vào danh sách thay đổi:
+bash
+Copy code
+git add .gitattributes X2/variables/variables.data-00000-of-00001
+
+  Commit thay đổi của bạn:
+bash
+Copy code
+git commit -m "Add variables.data-00000-of-00001 with Git LFS to X2/variables"
+
+  git pull origin main
+git push origin main
+
+
+  
+  
