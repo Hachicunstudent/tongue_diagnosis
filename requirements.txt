@@ -1,0 +1,6 @@
+numpy
+pandas
+streamlit
+tf-models-official
+matplotlib
+opencv-python-headless
