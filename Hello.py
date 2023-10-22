@@ -169,7 +169,7 @@ if uploaded_file is not None:
         img_hsv = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2HSV)
 
         # Điều chỉnh giá trị Hue
-        (h, s, v) = cv2.split(img_hsv)
+        h, s, v = cv2.split(img_hsv)
         h_adjusted = np.where(h < 20, h + 160, h - 20)
         img_hsv_adjusted = cv2.merge((h_adjusted, s, v))
 
@@ -184,13 +184,13 @@ if uploaded_file is not None:
 
         # Convert the image from BGR to RGB
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        (r, g, b) = cv2.split(img_rgb)
+        r, g, b = cv2.split(img_rgb)
 
         # Convert the image from RGB to HSV
         img_hsv = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2HSV)
 
         # Extract the Hue, Saturation, and Value channels
-        (h, s, v) = cv2.split(img_hsv)
+        h, s, v = cv2.split(img_hsv)
 
         # Apply CLAHE to V channel
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
@@ -224,7 +224,7 @@ if uploaded_file is not None:
         
         segmented_image=cv2.imread(seg_img_path)
         segmented_image_rgb = cv2.cvtColor(segmented_image, cv2.COLOR_BGR2RGB)
-        (r2, g2, b2) = cv2.split(segmented_image_rgb)
+        r2, g2, b2 = cv2.split(segmented_image_rgb)
 
         # Convert the image from RGB to HSV
         segmented_image_hsv = cv2.cvtColor(segmented_image_rgb, cv2.COLOR_RGB2HSV)
@@ -232,7 +232,7 @@ if uploaded_file is not None:
 
         # Extract the Hue, Saturation, and Value channels
        
-        (h2, s2, v2) = cv2.split(segmented_image_hsv)
+        h2, s2, v2 = cv2.split(segmented_image_hsv)
         
         progress.progress(4/5)  # Cập nhật progress bar sau bước 3
         # @title In ra hình ảnh bỏ bin đầu
@@ -331,7 +331,7 @@ if uploaded_file is not None:
         n = n[1:]
         bins = bins[1:]
 
-        ax6.bar(bins[:-1], n, width=np.diff(bins), color="Red", alpha=0.5, align="edge")
+        ax6.bar(bins[:-1], n, width=np.diff(bins), color="Blue", alpha=0.5, align="edge")
         ax6.set_title('Value')
         ax6.set_xlim([1, 256])
 
