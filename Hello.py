@@ -51,10 +51,7 @@ if uploaded_file is not None:
         st.info("Image analysis")
         progress = st.progress(0, text="Image processing, please wait")
         img_path=file_path
-        #Load model
-        model_dect_dir="X2"
-        imported = tf.saved_model.load(model_dect_dir)
-        model_fn = imported.signatures['serving_default']
+        
         # Dự đoán từ model
         from PIL import Image
         import numpy as np
@@ -75,6 +72,15 @@ if uploaded_file is not None:
         image = tf.cast(image, dtype=tf.uint8)
         progress.progress(1/5) 
 
+        @st.cache_resource  # Use st.cache_resource to load the model only once
+        def load_model(model_dect_dir):
+            imported = tf.saved_model.load(model_dect_dir)
+            return imported.signatures['serving_default']
+        
+        # Only call the function to load the model if it hasn't been loaded before
+        model_fn = load_model("X2")
+
+        
         # Predict using your model
         result = model_fn(image)
         boxes=result['detection_boxes'][0,0].numpy()
@@ -109,17 +115,6 @@ if uploaded_file is not None:
         # Hiển thị hình ảnh sử dụng Streamlit
         progress.progress(2/5)  # Cập nhật progress bar sau bước 2
 
-        #Load segment model
-        
-        model_seg_dir="seg_model"
-        imported = tf.saved_model.load(model_seg_dir)
-        model_sg = imported.signatures['serving_default']
-        
-        
-        
-
-        
-        
         def load_image(image_path, height, width):
             img = tf.io.read_file(image_path)
             img = tf.image.decode_image(img, channels=3)
@@ -138,6 +133,15 @@ if uploaded_file is not None:
         
         HEIGHT, WIDTH=(128,128)        
         image = load_image(crop_img_path, HEIGHT, WIDTH)
+
+        #Load segment model
+        @st.cache_resource  # Use st.cache_resource to load the model only once
+        def load_segment_model(model_seg_dir):
+            imported = tf.saved_model.load(model_seg_dir)
+            return imported.signatures['serving_default']
+        
+        # Only call the function to load the model if it hasn't been loaded before
+        model_sg = load_segment_model("seg_model")        
 
         # Dự đoán
         predicted_mask = model_sg(tf.expand_dims(image, axis=0))
