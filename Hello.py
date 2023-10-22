@@ -320,7 +320,7 @@ if uploaded_file is not None:
         n = n[1:]
         bins = bins[1:]
 
-        ax5.bar(bins[:-1], n, width=np.diff(bins), color="Blue", alpha=0.5, align="edge")
+        ax5.bar(bins[:-1], n, width=np.diff(bins), color="Green", alpha=0.5, align="edge")
         ax5.set_title('Saturation')
         ax5.set_xlim([1, 256])
 
