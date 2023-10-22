@@ -77,6 +77,9 @@ if uploaded_file is not None:
 
         # Predict using your model
         result = model_fn(image)
+        if not result.get("predictions"):
+            print("Không cắt được ảnh")
+            st.stop()
 
         boxes=result['detection_boxes'][0,0].numpy()
         score=result['detection_scores'][0,0].numpy()
@@ -142,6 +145,9 @@ if uploaded_file is not None:
 
         # Dự đoán
         predicted_mask = model_sg(tf.expand_dims(image, axis=0))
+        if not predicted_mask.get("predictions"):
+            print("Không segment được ảnh")
+            st.stop()
         binary_mask = create_binary_mask(predicted_mask['logits'])
 
         # Tạo ảnh đã được segment
